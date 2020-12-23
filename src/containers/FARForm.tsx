@@ -40,6 +40,7 @@ const FARForm: React.FC<Props> = () => {
 
   useEffect(() => {
         setLoading("Loading");
+        // get latest reqNo on component mount
         (async () => { 
             const latestReq = await getLatestReqNo();
             if (latestReq.data) {
@@ -47,11 +48,17 @@ const FARForm: React.FC<Props> = () => {
                 setReqNo(getNewReqNo(data.reqNo));
                 setLoading(false);
             } else {
+                setReqNo(`RN/${new Date().getFullYear()}/1`);
                 setLoading(false);
             }
         })();
-  }, [])
-  
+  }, []);
+
+  /**
+   * @param name - the name of the field to update
+   * @param index - the index number (row) of the field to update
+   * @param value - the value to set
+   */
   const handleChange = (name: string, index: number, value: any): void => {
     const tempRows = [...rows];
     switch (name) {
@@ -73,6 +80,8 @@ const FARForm: React.FC<Props> = () => {
     setRows(tempRows);
   };
 
+  // Adds a new row to the table
+  // Creates a new row increments the no field and updates the state
   const addRow = () => {
     const newRow = { ...ROW };
     newRow.no = rows.length + 1;
@@ -80,15 +89,21 @@ const FARForm: React.FC<Props> = () => {
     setEditingRow(rows.length);
   };
 
+  // Save the form to DB and download a PDF
   const saveAndDownload = async () => {
+    // Set state as loading
     setLoading("Saving");
+    // Reset prev errors
     setErrors({ ...ERRORS });
+
+    // Check for new errors - checks if the below fields present
     const newErrors = { ...ERRORS }
     if (!preparedBy) newErrors.preparedBy = "This field is required";
     if (!approvedBy) newErrors.approvedBy = "This field is required";
     if (!division) newErrors.division = "This field is required";
     setErrors(newErrors);
-        
+      
+    // If no errors continue
     if (preparedBy && approvedBy && division) {
         const form: AssetForm = {
             date: new Date(),
@@ -99,9 +114,14 @@ const FARForm: React.FC<Props> = () => {
             preparedBy,
             approvedBy
         }
+        // Call the addForm function to post the form
         const result = await addForm(form);
+
+        // If no errors generate the PDF, reset the fields and increment reqNo
         if (result && !result.error) {
           setLoading("Generating PDF")
+
+          // Generating blob of the pdf
           const blob = await pdf(
             <FARFormPDF
               date={getCurrentDate()}
@@ -113,18 +133,21 @@ const FARForm: React.FC<Props> = () => {
               preparedBy={preparedBy}
             />
           ).toBlob();
-            saveAs(blob, `${reqNo.split("/").join("-")}.pdf`);
+          // Saving the form with reqNo as the file name
+          saveAs(blob, `${reqNo.split("/").join("-")}.pdf`);
 
-            setLoading(false);
-            setRows([{ ...ROW }]);
-            setDivision("");
-            setRemarks("");
-            setPreparedBy("");
-            setApprovedBy("");
-            setReqNo(getNewReqNo(reqNo));
+          // Reset fields
+          setLoading(false);
+          setRows([{ ...ROW }]);
+          setDivision("");
+          setRemarks("");
+          setPreparedBy("");
+          setApprovedBy("");
+          setReqNo(getNewReqNo(reqNo));
         }
 
     } else {
+        // In case of error stop loading
         setLoading(false);
     }
   }

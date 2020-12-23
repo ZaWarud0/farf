@@ -2,8 +2,11 @@ import { Page, Text, View, Document, Font } from '@react-pdf/renderer';
 import { styles } from './FARFormStyles';
 import { AssetFormRow } from '../types';
 
+// Register a new font to be used in the generated pdf
 Font.register({family: 'Oswald', src: "https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf"});
 
+// Object format for props for the FixedAssetFormPDF component
+// FixedAssetFormPDF accepts these props
 interface FARFormPDF {
   date: string;
   division: string;
@@ -14,13 +17,21 @@ interface FARFormPDF {
   preparedBy: string;
 }
 
+/**
+ * Returns a <Document /> component
+ * @param FARFormPDF
+ * @returns a <Document /> component
+ */
 const FixedAssetFormPDF: React.FC<FARFormPDF> = ({date, division, reqNo, remarks, preparedBy, approvedBy, rows}) => (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.container}>
+          {/* Form Title */}
           <View style={{fontFamily: 'Oswald', marginHorizontal: 40, paddingBottom: 17.5}}>
             <Text>Fixed Asset Requisition Form</Text>
           </View>
+
+          {/* Form Information */}
           <View style={{flexDirection: 'row'}}>
             <View style={[styles.section, styles.sectionA]}>
               <View style={{flex: .35, fontFamily: 'Oswald'}}>
@@ -42,6 +53,7 @@ const FixedAssetFormPDF: React.FC<FARFormPDF> = ({date, division, reqNo, remarks
             </View>
           </View>
           
+          {/* Table Header Row */}
           <View style={styles.table}>
             <View style={styles.tableRow}>
               <View style={[styles.headerCell, {flex: .8}]}>
@@ -100,7 +112,8 @@ const FixedAssetFormPDF: React.FC<FARFormPDF> = ({date, division, reqNo, remarks
               ))  
             } 
           </View>
-  
+            
+            {/* Declaration */}
             <View style={[styles.footer, { marginBottom: 5 }]}>
               <View style={{flex: 1}}>
                   <View style={styles.sectionA}>
