@@ -1,38 +1,48 @@
-.App {
-  text-align: center;
+:root{
+  --title-color-main: black;
+  --text-color-main: #656465;
+  --text-color-dark: #525252;
+  --text-color-light: #fff;
+  --card-color-main: #005a87e7;
+  /* --card-color-main: #0E0E2E; */
+  --card-color-light: #57b0dd;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f2f2f2;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+* { 
+  margin: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app-container {
+  margin: 40px auto;
+  width: 80%;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.cp { cursor: pointer; }
+
+.df { display: flex; }
+.df.fdc { flex-direction: column; }
+.df.jcc { justify-content: center; }
+.df.jce { justify-content: flex-end; }
+.df.jcsa { justify-content: space-around; }
+.df.aic { align-items: center; }
+.df.aie { align-items: flex-end; }
+
+.mt-1 { margin-top: 10px; }
+
+.mb-2 { margin-bottom: 20px; }
+
+.mt-3 { margin-top: 30px; }
+.mb-3 { margin-bottom: 30px; }
+.mr-3 { margin-right: 30px; }
+.ml-3 { margin-left: 30px; }
+
+.mt-4 { margin-top: 40px; }
+.mr-4 { margin-right: 40px; }
+.mb-4 { margin-bottom: 40px; }
+.ml-4 { margin-left: 40px; }
