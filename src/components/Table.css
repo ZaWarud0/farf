@@ -1,3 +1,6 @@
+.table-container {
+    overflow-x: auto;
+}
 .table {
     width: 100%;
     border-spacing: 0px;
@@ -41,3 +44,48 @@
     background-color:  rgba(101, 100, 101, 0.01);
 }
 
+
+.list ul {
+    list-style-type: none;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px 0px 10px 0px;
+}
+
+.list ul li {
+    display: flex;
+    /* padding: 10px 10px 10px 10px; */
+}
+
+.list ul li:first-child div:first-child {
+    border-top-left-radius: 2.5px;
+}
+
+.list ul li:last-child div:first-child {
+    border-bottom-left-radius: 2.5px;
+}
+
+.list ul li:first-child div:last-child {
+    border-top-right-radius: 2.5px;
+}
+
+.list ul li:last-child div:last-child {
+    border-bottom-right-radius: 2.5px;
+}
+
+.list ul li div:first-child {
+    flex: .4;
+    background-color: var(--card-color-main);
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    font-size: .9em;
+    border-bottom: 1px solid rgba(87, 176, 221, 0.2);
+}
+
+.list ul li div:last-child {
+    flex: .6;
+    background-color:#57b0dd28;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(101, 100, 101, 0.1)
+    
+}

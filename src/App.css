@@ -46,3 +46,32 @@ body {
 .mr-4 { margin-right: 40px; }
 .mb-4 { margin-bottom: 40px; }
 .ml-4 { margin-left: 40px; }
+
+
+#info-sec { flex-wrap: wrap; }
+#info-sec-1 { flex: 1; }
+#info-sec-2 { flex: 1; }
+#dec-sec div:first-child {
+  margin-right: 40px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .input-container {
+    display: block;
+    margin-bottom: 30px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #info-sec, #dec-sec {
+    display: block;
+  }
+  #dec-sec div:first-child {
+    margin-right: 0px;
+    margin-bottom: 30px;
+  }
+  #info-sec-2 {
+    margin-left: 0px;
+  }
+}

@@ -3,7 +3,7 @@ import { AssetForm } from './types';
 
 // Create an axios instance with base URL set
 const instance = axios.create({
-    baseURL: 'http://localhost:5000/',
+    baseURL: 'http://35.240.245.45/api',
     timeout: 1000,
 });
 
